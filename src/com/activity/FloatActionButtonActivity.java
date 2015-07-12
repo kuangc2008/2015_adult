@@ -1,11 +1,11 @@
-package com._01_FloatActionButton;
+package com.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 
-public class FloatActionButtonActivity extends Activity {
+public class FloatActionButtonActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

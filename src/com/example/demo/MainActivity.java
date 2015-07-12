@@ -24,7 +24,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class MainActivity extends Activity {
+import com.activity.BaseActivity;
+
+public class MainActivity extends BaseActivity {
     public static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
