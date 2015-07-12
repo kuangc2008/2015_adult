@@ -47,6 +47,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.activity.RecyclerViewActivity"
+            android:label="recycleView/simple" >
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
+
         
     </application>
 
