@@ -13,7 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 public class AllActivityManager {
-    public static final String ACTION = "com.example.demo.demoaction";
+    public static final String ACTION = "com.example.demo.demoaction2";
     
     private Context mContext = null;
     private PackageManager mPm = null;

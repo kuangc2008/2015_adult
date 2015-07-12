@@ -36,7 +36,7 @@
         <activity android:name="com._01_FloatActionButton.FloatActionButtonActivity"
             android:label="Floatt Action Button" >
             <intent-filter>
-                <action android:name="com.example.demo.demoaction"/>
+                <action android:name="com.example.demo.demoaction2"/>
             </intent-filter>
         </activity>
 
