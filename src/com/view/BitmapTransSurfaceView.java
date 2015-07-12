@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -60,7 +61,21 @@ public class BitmapTransSurfaceView extends SurfaceView implements SurfaceHolder
             canvas = mHolder.lockCanvas();
             canvas.drawBitmap(mBitmap, 0, 0, null);
             String text = "width:" + mBitmap.getWidth() + " height:" + mBitmap.getHeight();
-            canvas.drawText(text, mBitmap.getWidth(), mBitmap.getHeight()/2, mTextPaint);
+            canvas.drawText(text, mBitmap.getWidth(), mBitmap.getHeight() / 2, mTextPaint);
+
+
+            Matrix matrix = new Matrix();
+            matrix.postTranslate(171, 225);
+            matrix.postScale(-1, 1, 171 + mBitmap.getWidth() / 2, 225 + mBitmap.getHeight() / 2);
+            canvas.drawBitmap(mBitmap, matrix, null);
+
+
+            Matrix matrix2 = new Matrix();
+            matrix2.postTranslate(0, 225 );
+            matrix2.postScale(1, -1, mBitmap.getWidth(), 225+ mBitmap.getHeight()/2);
+            canvas.drawBitmap(mBitmap, matrix2, null);
+
+
         } catch (Exception e) {
         }finally {
             mHolder.unlockCanvasAndPost(canvas);
