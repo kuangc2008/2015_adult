@@ -54,7 +54,12 @@
             </intent-filter>
         </activity>
 
-        
+        <activity android:name="com.activity.AnnotationActivity"
+            android:label="AnnotationActivity" >
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
