@@ -2,9 +2,16 @@ package com.annotation.util;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 
 import com.annotation.ContentView;
+import com.annotation.OnClick;
+import com.annotation.ViewInjet;
 
+import java.io.File;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -12,6 +19,7 @@ import java.lang.reflect.Method;
  */
 public class ViewInjectUtils {
     private static final String METHOD_SET_CONTENT_VIEW = "setContentView";
+    private static final String METHOD_FIND_VIEW_BY_ID = "findViewById";
 
     public static void injectContentView(Activity activity) {
 
@@ -29,6 +37,61 @@ public class ViewInjectUtils {
                 Log.w("kcc", "method", e);
             }
         }
+    }
+
+
+    public static void injectViews(Activity activity) {
+        Class<? extends Activity> clazz = activity.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        for(Field field : fields) {
+            ViewInjet fileAnnotation = field.getAnnotation(ViewInjet.class);
+            if(fileAnnotation != null) {
+                int resId = fileAnnotation.value();
+                try {
+                    Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID, int.class);
+                    method.setAccessible(true);
+                    View view = (View) method.invoke(activity, resId);
+
+                    field.setAccessible(true);
+                    field.set(activity, view);
+                } catch (Exception e) {
+                    Log.w("kcc", "method", e);
+                }
+            }
+
+        }
+    }
+
+    public static void injectClicks(final Activity activity) {
+        final Class<? extends Activity> clazz = activity.getClass();
+        Method[]  methods  = clazz.getDeclaredMethods();
+        for(final Method method : methods) {
+            Annotation[]  animations = method.getAnnotations();
+            for(Annotation annotation : animations) {
+                if(annotation instanceof OnClick) {
+                    OnClick clickAnntotion = (OnClick) annotation;
+                    int[] resIds = clickAnntotion.value();
+                    for(int resId : resIds) {
+                        View view = activity.findViewById(resId);
+                        view.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    method.invoke(activity, v);
+                                } catch (Exception e) {
+                                    Log.w("kcc", "clcik", e);
+                                }
+                            }
+                        });
+                    }
+                }
+
+            }
+        }
+
+
+
 
     }
+
 }
