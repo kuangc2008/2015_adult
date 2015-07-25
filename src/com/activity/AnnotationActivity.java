@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.annotation.ContentView;
 import com.annotation.OnClick;
@@ -30,7 +31,7 @@ public class AnnotationActivity extends BaseActivity{
 
         ViewInjectUtils.injectContentView(this);
         ViewInjectUtils.injectViews(this);
-        ViewInjectUtils.injectClicks(this);
+        ViewInjectUtils.injectClicks2(this);
     }
 
 
@@ -39,9 +40,11 @@ public class AnnotationActivity extends BaseActivity{
         switch (view.getId()) {
             case R.id.button1:
                 Log.i("kcc", "button1 clicked");
+                Toast.makeText(AnnotationActivity.this, "button1 clicked", 1000).show();
                 break;
             case R.id.button2:
                 Log.i("kcc", "button2 clicked");
+                Toast.makeText(AnnotationActivity.this, "button2 clicked", 1000).show();
                 break;
 
         }

@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.annotation.ContentView;
+import com.annotation.DynamicHandler;
+import com.annotation.EventBase;
 import com.annotation.OnClick;
 import com.annotation.ViewInjet;
 
@@ -13,6 +15,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * Created by chengkuang on 15/7/24.
@@ -58,7 +61,6 @@ public class ViewInjectUtils {
                     Log.w("kcc", "method", e);
                 }
             }
-
         }
     }
 
@@ -88,10 +90,52 @@ public class ViewInjectUtils {
 
             }
         }
-
-
-
-
     }
 
+
+    public static void injectClicks2(final Activity activity) {
+        final Class<? extends Activity> clazz = activity.getClass();
+        Method[]  methods  = clazz.getDeclaredMethods();
+        for(final Method method : methods) {
+            OnClick animation = method.getAnnotation(OnClick.class);
+            if(animation != null) {
+                Class<? extends Annotation>  annotationType = animation.annotationType();
+                EventBase eventBaseAnnotation = annotationType.getAnnotation(EventBase.class);
+                if(eventBaseAnnotation != null) {
+                    String listenerSetter = eventBaseAnnotation.listenerSetter();
+                    Class<?> listenerType = eventBaseAnnotation.listenerType();
+                    String methodName = eventBaseAnnotation.methodName();
+
+                    try {
+                        Method aMethod = annotationType.getDeclaredMethod("value");
+                        int[] viewIds = (int[]) aMethod.invoke(animation, null);
+
+                        DynamicHandler handler = new DynamicHandler(activity);
+                        handler.addMethod(methodName, method);
+
+
+                        Object listener = Proxy.newProxyInstance(listenerType.getClassLoader(),
+                                new Class<?>[]{listenerType}, handler);
+
+                        for(int viewid : viewIds) {
+                            View view = activity.findViewById(viewid);
+                            Method setEventListenerMethod = view.getClass().getMethod(listenerSetter, listenerType);
+                            setEventListenerMethod.invoke(view, listener);
+                        }
+
+
+
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }
+    }
 }
