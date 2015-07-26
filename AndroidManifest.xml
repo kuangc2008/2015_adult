@@ -60,6 +60,13 @@
                 <action android:name="com.example.demo.demoaction2"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.activity.SwipFlingActivity"
+            android:label="SwipFlingActivity" >
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
