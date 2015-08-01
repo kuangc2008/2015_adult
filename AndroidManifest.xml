@@ -77,6 +77,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.activity.DiskUsageActivity"
+            android:label="DiskUsageActivity" >
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
