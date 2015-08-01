@@ -33,6 +33,7 @@ public class WIfiUtils {
         //前面在高，就是高字节；  前面在低，就是低字节
         byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
         byteBuffer.putInt(ip);
+
         try {
             return InetAddress.getByAddress(byteBuffer.array()).getHostAddress();
         } catch (UnknownHostException e) {
@@ -40,4 +41,7 @@ public class WIfiUtils {
         }
         return null;
     }
+
+
+
 }
