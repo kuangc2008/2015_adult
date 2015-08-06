@@ -69,8 +69,8 @@ public class BinaryTreePostOrder {
             }
 
             prev = current;
-
         }
+        return result;
     }
 
 }
