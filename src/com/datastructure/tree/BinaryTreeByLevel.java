@@ -1,11 +1,9 @@
-package com.datastructure;
+package com.datastructure.tree;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * Created by kuangcheng on 15-8-6.

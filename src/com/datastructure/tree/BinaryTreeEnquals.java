@@ -1,4 +1,4 @@
-package com.datastructure;
+package com.datastructure.tree;
 
 import java.util.Stack;
 

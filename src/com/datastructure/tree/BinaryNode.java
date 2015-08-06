@@ -1,4 +1,4 @@
-package com.datastructure;
+package com.datastructure.tree;
 
 /**
  * Created by kuangcheng on 15-8-6.
