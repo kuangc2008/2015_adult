@@ -15,9 +15,10 @@ public class DataStructureActivity extends BaseActivity{
     private ArrayAdapter<String> mAdapter= null;
     private String[] ss = new String[]{
             "Are binary trees equals",
+            "Binary tree in order",
+
             "Binary tree by level",
             "Binary tree pre order",
-            "Binary tree in order",
             "Binary tree post order",
             "Is binary search tree",
             "Binary tree depth",
