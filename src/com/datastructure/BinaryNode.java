@@ -3,7 +3,7 @@ package com.datastructure;
 /**
  * Created by kuangcheng on 15-8-6.
  */
-public class BinaryNode<T> {
+public class BinaryNode<T extends Comparable> {
 
     private final T data;
     private BinaryNode<T> left;
