@@ -48,7 +48,7 @@ public class BinaryTreeInOrder {
         while( !stack.empty()  || current != null) {
             if(current != null) {
                 stack.push(current);
-                current = current.getLeft();    
+                current = current.getLeft();
             } else {
                 BinaryNode node = stack.pop();
                 result.add(node);
