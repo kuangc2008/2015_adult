@@ -13,7 +13,7 @@ public class PathToEveryLeaf {
             throw new IllegalArgumentException("null");
         }
 
-        return calcucatePathToLeafs(root, new LinkedList<BinaryNode>);
+        return calcucatePathToLeafs(root, new LinkedList<BinaryNode>());
     }
 
     private List<List<BinaryNode>> calcucatePathToLeafs(BinaryNode<Integer> root, LinkedList<BinaryNode> path) {
