@@ -1,7 +1,11 @@
 package com.activity;
 
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -35,6 +39,9 @@ public class DataStructureActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mListView = new ListView(this);
+
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ss);
         mListView.setAdapter(mAdapter);
         setContentView(mListView);
