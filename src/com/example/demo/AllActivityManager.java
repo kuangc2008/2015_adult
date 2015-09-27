@@ -27,14 +27,20 @@ public class AllActivityManager {
 //        allActivityMap = new TreeMap<String, List<AppInfo>>();
         List<ResolveInfo> activitys = mPm.queryIntentActivities(new Intent(ACTION), PackageManager.GET_ACTIVITIES);
         for(ResolveInfo activity : activitys) {
-            AppInfo info = new AppInfo(activity, mPm);
+            AppInfo info = null;
+            try {
+                info = new AppInfo(activity, mPm);
+                appInfos.add(info);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 //            String key = info.getTitle("");
 //            
 //            List<AppInfo> lists = allActivityMap.get(key);
 //            if(lists == null) {
 //                lists = new ArrayList<AppInfo>();
 //            }
-            appInfos.add(info);
+
         }
     }
     private static AllActivityManager instance = null;

@@ -90,6 +90,20 @@
                 <action android:name="com.example.demo.demoaction2"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.activity.CustomViewListActivity"
+            android:label="CustomViewList" >
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.activity.CustomView_Circule"
+            android:label="">
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

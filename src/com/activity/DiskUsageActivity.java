@@ -137,10 +137,7 @@ public class DiskUsageActivity extends BaseActivity {
         }
         tv.setTag(myFile);
 
-        if(myFile.size > 0) {
-        } else {
-
-
+        if(myFile.size < 0) {
             MyFileManager.getInstance().getFoldSizeAsync(myFile.mFilePath, new MyFileManager.FileSizeGetListener() {
                 @Override
                 public void onFileSizeGet(MyFile file) {
@@ -149,7 +146,6 @@ public class DiskUsageActivity extends BaseActivity {
                     tv.setText(file.mFileSize);
                 }
             });
-
         }
     }
 

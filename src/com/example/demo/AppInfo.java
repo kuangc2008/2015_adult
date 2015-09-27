@@ -3,6 +3,7 @@ package com.example.demo;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.text.TextUtils;
 
 public class AppInfo {
 
@@ -10,9 +11,12 @@ public class AppInfo {
 
     public String label;
 
-    public AppInfo(ResolveInfo activity, PackageManager pm) {
+    public AppInfo(ResolveInfo activity, PackageManager pm) throws Exception {
         this.info = activity.activityInfo;
         this.label = (String) info.loadLabel(pm);
+        if(TextUtils.isEmpty(label)) {
+            throw new Exception();
+        }
     }
     
     public ActivityInfo getActivityInfo() {
