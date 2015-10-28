@@ -104,6 +104,13 @@
                 <action android:name="com.example.demo.demoaction2"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.activity.ViewPagerTestActivity"
+            android:label="viewPagerActivity">
+            <intent-filter>
+                <action android:name="com.example.demo.demoaction2"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

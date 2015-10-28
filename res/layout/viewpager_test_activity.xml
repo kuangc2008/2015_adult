@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.view.test.MyLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.view.test.MyFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.view.test.MyViePager
+            android:layout_width="match_parent"
+            android:id="@+id/view_pager"
+            android:layout_height="200dp">
+        </com.view.test.MyViePager>
+    </com.view.test.MyFrameLayout>
+
+    <com.view.test.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="gaga"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/myFrameLayout">
+
+        <com.view.test.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FrameLayout"/>
+    </LinearLayout>
+
+    <com.view.test.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hehe2"/>
+
+</com.view.test.MyLinearLayout>
