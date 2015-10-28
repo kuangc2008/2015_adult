@@ -20,21 +20,27 @@
         android:text="gaga"/>
 
 
-    <LinearLayout
+    <com.view.test.MyLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:orientation="vertical"
+        android:background="#FF00"
         android:id="@+id/myFrameLayout">
 
         <com.view.test.MyTextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:background="#F0FF"
+            android:id="@+id/textview"
             android:text="FrameLayout"/>
-    </LinearLayout>
+    </com.view.test.MyLinearLayout>
 
     <com.view.test.MyTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="hehe2"/>
+
+
+
 
 </com.view.test.MyLinearLayout>

@@ -39,9 +39,24 @@ public class ViewPagerTestActivity extends BaseActivity {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("kcc2", "22 click");
                 MyTextView view = new MyTextView(getBaseContext());
                 view.setText("newnewnew");
                 layout.addView(view);
+            }
+        });
+        layout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.i("kcc2", "22 onLongClick");
+                return false;
+            }
+        });
+
+        findViewById(R.id.textview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("kcc2", "11 click");
             }
         });
     }
@@ -77,7 +92,7 @@ public class ViewPagerTestActivity extends BaseActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Log.i("kcc", this + " onCreateView :" + getArguments().getInt("hehe"));
             MyTextView tv = new MyTextView(this.getActivity());
-            tv.setText("ÕâÊÇµÚ¼¸¸öactivity" + getArguments().getInt("hehe"));
+            tv.setText("ï¿½ï¿½ï¿½ÇµÚ¼ï¿½ï¿½ï¿½activity" + getArguments().getInt("hehe"));
             return tv;
         }
     }

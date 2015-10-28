@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 public class MyTextView extends TextView {
@@ -27,15 +28,21 @@ public class MyTextView extends TextView {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.i("kcc", this + " onLayout:" + getText().toString());
+        Log.i("kcc2", this + " onLayout:" + getText().toString());
         super.onLayout(changed, l, t, r, b);
 
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.i("kcc", this + " onDraw:" + getText().toString());
+        Log.i("kcc2", this + " onDraw:" + getText().toString());
         super.onDraw(canvas);
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i("kcc2", "onTOuchEvent->", new Exception());
+        return super.onTouchEvent(event);
     }
 }
