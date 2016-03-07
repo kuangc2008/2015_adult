@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\raw\\urls",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\raw\\urls"
+    },
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\raw\\names",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\raw\\names"
+    }
+]

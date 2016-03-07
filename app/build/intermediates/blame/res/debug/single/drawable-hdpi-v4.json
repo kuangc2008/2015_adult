@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\app_sample_code.png",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\drawable-hdpi\\app_sample_code.png"
+    },
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\logo240dpi.png",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\drawable-hdpi\\logo240dpi.png"
+    },
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\npatch240dpi.9.png",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\drawable-hdpi\\npatch240dpi.9.png"
+    },
+    {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\vumeter.png",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\drawable-hdpi\\vumeter.png"
+    }
+]
