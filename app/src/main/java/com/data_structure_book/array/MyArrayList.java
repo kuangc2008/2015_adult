@@ -33,10 +33,10 @@ public class MyArrayList<T> implements MyList<T> {
         return true;
     }
 
-    @Override
-    public boolean remove(T data) {
-        return false;
-    }
+//    @Override
+//    public boolean remove(T data) {
+//        return false;
+//    }
 
 
     public void trimToSize() {

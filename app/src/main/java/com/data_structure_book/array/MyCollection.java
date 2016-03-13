@@ -10,6 +10,6 @@ public interface MyCollection<T> {
     void clear();
     boolean contains(T data);
     boolean add (T data);
-    boolean remove(T data);
+  //  boolean remove(T data);
     MyIterator<T> iterator();
 }
