@@ -5,11 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+
 /**
- * Created by kuangcheng on 15-8-6.
+ * Given a binary tree, can you write a method to return a list of nodes by level?
+ * And without any additional data structure?
  */
 public class BinaryTreeByLevel {
 
+    /**
+     * 按照顺序，把树的节点，加入到一个queue中（动态的）
+     * root  1-left  1-right  1-2-left 2-right，不停的删除掉前面节点，增加后面节点
+     */
     public List<BinaryNode> getUsingQueue(BinaryNode root) {
         validateTree(root);
 
@@ -38,6 +44,12 @@ public class BinaryTreeByLevel {
     }
 
 
+    /**
+     * 获取到高度
+     * 按高度进行循环。  每次都对树做递归操作
+     * @param root
+     * @return
+     */
     public List<BinaryNode> getWithOutAdditionalDataStructures(BinaryNode root) {
         validateTree(root);
 
@@ -49,6 +61,11 @@ public class BinaryTreeByLevel {
         return result;
     }
 
+    /**
+     * 获取深度
+     * @param root
+     * @return
+     */
     private int getDepth(BinaryNode root) {
         if(root == null) {
             return 0;

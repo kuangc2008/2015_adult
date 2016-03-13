@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Created by kuangcheng on 15-8-6.
+ * Given a binary tree, can you write a method to get a List<BinaryNode> using a pre order
+ * traversal?
  */
 public class BinaryTreePreOrder {
 
@@ -32,6 +33,9 @@ public class BinaryTreePreOrder {
     }
 
 
+    /**
+     * 先序遍历的循环，应该用stack
+     */
     public List<BinaryNode> getIterative(BinaryNode root) {
         validataBinaryNode(root);
 

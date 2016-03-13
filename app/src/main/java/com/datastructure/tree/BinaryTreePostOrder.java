@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Created by kuangcheng on 15-8-6.
+ * Given a binary tree, can you write a method to getRecursive a List<BinaryNode> using a post
+ * order traversal?
  */
 public class BinaryTreePostOrder {
 
@@ -19,8 +20,8 @@ public class BinaryTreePostOrder {
         if(root == null) {
             return result;
         }
-        result.add(root.getLeft());
-        result.add(root.getRight());
+        result.addAll( getInner(root.getLeft()));
+        result.addAll( getInner(root.getRight()));
         result.add(root);
         return result;
     }
@@ -33,6 +34,10 @@ public class BinaryTreePostOrder {
     }
 
 
+    /**
+     * @param root
+     * @return
+     */
     public List<BinaryNode> getIterative(BinaryNode root) {
         validateTree(root);
         List<BinaryNode> result = new LinkedList<BinaryNode>();

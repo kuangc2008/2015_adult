@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Created by kuangcheng on 15-8-6.
+ * Given a binary tree, can you write a method to get a List<BinaryNode> using a in order
+ * traversal?
  */
 public class BinaryTreeInOrder {
 
@@ -36,7 +37,7 @@ public class BinaryTreeInOrder {
     }
 
     /**
-     * 方法二
+     * 方法二，仍然是栈
      */
     public List<BinaryNode<Integer>> getInterative(BinaryNode<Integer> root) {
         validataBinaryNode(root);

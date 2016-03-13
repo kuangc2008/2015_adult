@@ -8,19 +8,43 @@
         "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\anim\\animator.xml"
     },
     {
-        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\animator_set.xml",
-        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\anim\\animator_set.xml"
+        "merged": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\object_animator.xml",
+        "source": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\src\\main\\res\\anim\\object_animator.xml"
     },
     {
         "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fullscreen_enter_slide_up.xml",
         "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\anim\\fullscreen_enter_slide_up.xml"
     },
     {
+        "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\animator_set.xml",
+        "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\anim\\animator_set.xml"
+    },
+    {
         "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\object_animator.xml",
         "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\anim\\object_animator.xml"
     },
     {
+        "merged": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\animator.xml",
+        "source": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\src\\main\\res\\anim\\animator.xml"
+    },
+    {
         "merged": "D:\\workspace\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\color_animator.xml",
         "source": "D:\\workspace\\2015_adult\\app\\src\\main\\res\\anim\\color_animator.xml"
+    },
+    {
+        "merged": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fullscreen_exit_slide_up.xml",
+        "source": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\src\\main\\res\\anim\\fullscreen_exit_slide_up.xml"
+    },
+    {
+        "merged": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\color_animator.xml",
+        "source": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\src\\main\\res\\anim\\color_animator.xml"
+    },
+    {
+        "merged": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\animator_set.xml",
+        "source": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\src\\main\\res\\anim\\animator_set.xml"
+    },
+    {
+        "merged": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fullscreen_enter_slide_up.xml",
+        "source": "D:\\worksapce2\\mysrc\\2015_adult2\\2015_adult\\app\\src\\main\\res\\anim\\fullscreen_enter_slide_up.xml"
     }
 ]

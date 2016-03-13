@@ -1,7 +1,7 @@
 package com.datastructure.string;
 
 /**
- * Created by chengkuang on 15/8/8.
+ * 如果第二个string包含第一个string，则返回true
  */
 public class Contains {
 

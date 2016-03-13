@@ -1,10 +1,16 @@
 package com.datastructure.string;
 
 /**
- * Created by kuangcheng on 15-8-7.
+ * 将int值转变为字符串
  */
 public class IntToString {
 
+
+    /**
+     * 通过取余得到末尾，放到stringbuild中
+     * @param number
+     * @return
+     */
     public String transForm(int number) {
         boolean isNegative = false;
         StringBuilder sb = new StringBuilder();

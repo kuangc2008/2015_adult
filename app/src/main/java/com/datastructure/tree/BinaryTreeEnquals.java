@@ -3,7 +3,7 @@ package com.datastructure.tree;
 import java.util.Stack;
 
 /**
- * Created by kuangcheng on 15-8-6.
+ * Given two binary trees, can you write a method to check if this trees are equals?
  */
 public class BinaryTreeEnquals {
 
@@ -23,7 +23,7 @@ public class BinaryTreeEnquals {
             return false;
         } else {
             return tree1.equals(tree2)
-                    && areEqualsInner(tree1.getLeft(), tree2.getRight())
+                    && areEqualsInner(tree1.getLeft(), tree2.getLeft())
                     && areEqualsInner(tree1.getRight(), tree2.getRight());
         }
     }
