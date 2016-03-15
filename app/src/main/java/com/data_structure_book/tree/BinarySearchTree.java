@@ -1,5 +1,7 @@
 package com.data_structure_book.tree;
 
+import org.apache.http.HeaderIterator;
+
 /**
  * Created by kuangcheng01 on 2016/3/14.
  */
@@ -46,7 +48,11 @@ public class BinarySearchTree<T extends Comparable<? super T>>  {
     }
 
     public void printTree() {
-
+        if(isEmpty()) {
+            System.out.println("Empty tree");
+        } else {
+            printTree(root);
+        }
     }
 
     private boolean contains(T e, BinaryNode<T> t) {
@@ -126,9 +132,21 @@ public class BinarySearchTree<T extends Comparable<? super T>>  {
     }
 
     public void printTree(BinaryNode<T> t) {
-
+        if(root != null) {
+            printTree(t.left);
+            System.out.println(t.element);
+            printTree(t.right);
+        }
     }
 
+    public int height(BinaryNode root) {
+        if (root == null) {
+            return -1;
+        }
+
+        return 1 + Math.max(height(root.left) , height(root.right));
+
+    }
 
 
 
