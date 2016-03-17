@@ -17,7 +17,7 @@ public class PBTestActivity extends Activity {
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         Button bt1 = new Button(this);
-        bt1.setText("写入一个pb");
+        bt1.setText("write pb");
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,7 +26,7 @@ public class PBTestActivity extends Activity {
         });
         ll.addView(bt1);
         Button bt2 = new Button(this);
-        bt2.setText("读取一个pb");
+        bt2.setText("read pb");
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

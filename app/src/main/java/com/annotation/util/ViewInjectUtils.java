@@ -108,7 +108,7 @@ public class ViewInjectUtils {
 
                     try {
                         Method aMethod = annotationType.getDeclaredMethod("value");
-                        int[] viewIds = (int[]) aMethod.invoke(animation, null);
+                        int[] viewIds = (int[]) aMethod.invoke(animation, new Object[]{});
 
                         DynamicHandler handler = new DynamicHandler(activity);
                         handler.addMethod(methodName, method);

@@ -13,14 +13,14 @@ public class JISuan {
 //
 //        System.out.println(firstFive + secondFive + thirdFive + fourthFive);
 
-        double  firstFive = 352f  + 39.9 + 131 + 13.8 + 63;   //352ÊÇ5ÈË³Ô·¹£¬×ßµÄÄÇÒ»Ìì;  63ÊÇµ±Ç°ÍíÉÏ´ò³µ»ØÈ¥
-        double secondFive = 81 + 97 + 24 + 9 + 15.1;        //81  ÊÇµÚ¶þÌìÍíÉÏ´ò³µ»ØÈ¥£»  97ÊÇµÚÈýÌì´ò³µ»ØÈ¥
-        double threeFive = 48.39 + 22.3 + 26.5 + 28.6+ 7.8 ;
-        double fourthFive =  19.9 + 18.95 + 22.8 + 599 + 20.8; //699ÊÇÐ¡Ã×ÊÖ»ú
-        double fivfFive = 349 + 35.7 + 17.9 + 100 + 87;   //349ÊÇµç¶¯ÑÀË¢
-        double sixFive = 6.8 + 50 + 29.9 + 9.8 + 9.9;
-        double sevFive = 100 + 15;
-        System.out.println(firstFive + secondFive + threeFive + fourthFive + fivfFive + sixFive + sevFive);
+//        double  firstFive = 352f  + 39.9 + 131 + 13.8 + 63;   //352ï¿½ï¿½5ï¿½Ë³Ô·ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½Ò»ï¿½ï¿½;  63ï¿½Çµï¿½Ç°ï¿½ï¿½ï¿½Ï´ò³µ»ï¿½È¥
+//        double secondFive = 81 + 97 + 24 + 9 + 15.1;        //81  ï¿½ÇµÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ò³µ»ï¿½È¥ï¿½ï¿½  97ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ò³µ»ï¿½È¥
+//        double threeFive = 48.39 + 22.3 + 26.5 + 28.6+ 7.8 ;
+//        double fourthFive =  19.9 + 18.95 + 22.8 + 599 + 20.8; //699ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ö»ï¿½
+//        double fivfFive = 349 + 35.7 + 17.9 + 100 + 87;   //349ï¿½Çµç¶¯ï¿½ï¿½Ë¢
+//        double sixFive = 6.8 + 50 + 29.9 + 9.8 + 9.9;
+//        double sevFive = 100 + 15;
+//        System.out.println(firstFive + secondFive + threeFive + fourthFive + fivfFive + sixFive + sevFive);
 
     }
 }
