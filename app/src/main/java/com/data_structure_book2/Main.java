@@ -4,10 +4,13 @@ package com.data_structure_book2;
 import android.util.Log;
 
 import com.data_structure_book.heap.BinaryHeap;
+import com.example.demo.AppInfo;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Main {
 
@@ -191,12 +194,10 @@ public class Main {
 
     @Test
     public void test6() {
-
         int[] preList = new int[]{1, 2, 4, 7, 3, 5, 6, 8};
         int[] middleList = new int[] {4, 7, 2, 1, 5, 3, 8, 6};
         BinaryTree tree = buildTree(preList, middleList);
-
-
+        System.out.println("");
     }
 
     public static class BinaryTree {
@@ -205,14 +206,332 @@ public class Main {
         BinaryTree right;
     }
 
-    public static BinaryTree buildTree(int[] reList, int[] middleList) {
+    /**
+     * 4 由前序和中序数组，打印出树
+     *
+     * 中序： 左边还是右边
+     * 前序： 第一个界面
+     * 递归
+     *
+     * 1 2 4 7 3 5 6 8
+     * 4 7 2 1 5 3 8 6
+     *
+     */
+    public static BinaryTree buildTree(int[] preList, int[] middleList) {
+        if (preList == null) {
+            throw new IllegalArgumentException();
+        }
+
+        BinaryTree root = new BinaryTree();
+        buildTree(root, preList, 0, middleList, 0, middleList.length - 1);
+        return root;
+    }
+
+    public static BinaryTree buildTree(BinaryTree root, int[] preList, int preStart,
+                                       int[] middleList, int middleStart, int middleEnd) {
+        int size = middleEnd - middleStart;
+        if (preList == null || size < 0 || preStart >= preList.length) {
+            return null;
+        }
+
+        if (root == null) {
+            root = new BinaryTree();
+        }
+        root.data = preList[preStart];
+
+        int middleRootPos = middleStart;
+        while( preList[preStart] != middleList[middleRootPos] && middleRootPos <= middleEnd) {
+            middleRootPos++;
+        }
+
+        root.left =  buildTree(root.left, preList, preStart + 1, middleList, middleStart,   middleRootPos - 1);
+        root.right =  buildTree(root.right, preList, preStart + middleRootPos - middleStart + 1 , middleList , middleRootPos + 1,  middleEnd);
+
+        return root;
+    }
 
 
-        return null;
+     @Test
+    public void test7() {
+         QueeuWithStack<Integer> queue = new QueeuWithStack<Integer>();
+         queue.appendTail(10);
+         queue.appendTail(100);
+         queue.appendTail(80);
+
+
+         System.out.println("tail1->" + queue.deleteHead());
+         System.out.println("tail1->" + queue.deleteHead());
+         System.out.println("tail1->" + queue.deleteHead());
+         queue.appendTail(50);
+         System.out.println("tail1->" + queue.deleteHead());
+         System.out.println("tail1->" + queue.deleteHead());
+
+    }
+
+
+    /**
+     * 5 用两个栈来实现队列
+     */
+    public class QueeuWithStack<T> {
+        Stack<T> inStack = new Stack<T>();
+        Stack<T> outStack = new Stack<T>();
+
+        public void appendTail(T element) {
+            inStack.push(element);
+        }
+
+        public T deleteHead() {
+            if (outStack.isEmpty()) {
+                if (inStack.isEmpty()) {
+                    System.out.println("no element");
+                    return null;
+                } else {
+                    while(!inStack.isEmpty()) {
+                        outStack.push( inStack.pop() );
+                    }
+                    return outStack.pop();
+                }
+            } else {
+                return outStack.pop();
+            }
+        }
+
+    }
+
+    @Test
+    public void test8() {
+        int[] data = new int[]{1, 100 , 9, 8, 10, 10, 80, 90};
+        quickSort(data);
+        System.out.println(Arrays.toString(data));
+    }
+
+    public static void quickSort(int[] datas) {
+        if (datas == null) {
+            throw new IllegalArgumentException();
+        }
+
+        quickSortRec(datas, 0 , datas.length - 1);
+
+    }
+
+    /**
+     * 6 快速排序1
+     * 小于中间的移左边，大于中间的移右边
+     *
+     */
+    private static void quickSortRec(int[] arr, int low, int high) {
+
+
+        // pick the pivot
+        int middle = low + (high - low)/2;
+        int pivot = arr[middle];
+
+        // make left < pivot and right > pivot
+        int i = low, j = high;
+        while( i <= j) {
+
+            while( arr[i] < pivot) {
+                i ++;
+            }
+            while (arr[j] > pivot) {
+                j --;
+            }
+
+            if ( i <= j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        // recursively sort two sub parts
+        if (low < j) {
+            quickSortRec(arr, low, j);
+        }
+
+        if (high > i) {
+            quickSortRec(arr, i, high);
+        }
+    }
+
+    public static void swap(int[] datas, int i, int j) {
+        int tmp = datas[i];
+        datas[i] = datas[j];
+        datas[j] = tmp;
+    }
+
+    @Test
+    public void test9() {
+        int[] data = new int[]{1, 80 ,8,  9, 8, 10, 10, 80, 90};
+        sortAge(data);
+        System.out.println(Arrays.toString(data));
     }
 
 
 
+    /**
+     * 7 对年龄排序
+     */
+    public static void sortAge(int[] ages) {
+        if (ages == null || ages.length == 0) {
+            return;
+        }
 
+        int[] timesOfAge = new int[100]; //1-99
+        for(int age : ages) {
+            if (age < 0 || age > 99) {
+                throw  new IllegalArgumentException();
+            }
+            timesOfAge[age]++;
+        }
+
+        int pos = 0;
+        for(int age = 0; age < timesOfAge.length; age++) {
+            while (timesOfAge[age] > 0) {  //此处用for循环会更好
+                ages[pos++] = age;
+                timesOfAge[age]--;
+            }
+        }
+    }
+
+    @Test
+    public void test10() {
+//        int[] data = new int[]{10, 12 , 20, 3, 4,  6, 9};
+        int[] data = new int[]{1, 0 , 1, 1, 1,  1, 1};
+        int result = rotateSortedArray(data);
+        System.out.println(result);
+    }
+
+
+    /**
+     * 8 Rotation of sorted array
+     *
+     * 最简单就是： 从投到尾遍历即可
+     */
+    public static int rotateSortedArray(int[] rotatedArray) {
+        if (rotatedArray[rotatedArray.length -1 ] > rotatedArray[0]) {
+            return rotatedArray[0];
+        }
+        return  rotateSortedArray(rotatedArray, 0, rotatedArray.length - 1);
+    }
+
+
+    public static int rotateSortedArray(int[] rotatedArray, int start, int end) {
+        if (start == end) {
+            return rotatedArray[start];
+        }
+        if (start + 1 == end) {
+            return rotatedArray[end];
+        }
+
+        int center = (start + end) / 2;
+        if (rotatedArray[center] > rotatedArray[0]) {
+            return rotateSortedArray(rotatedArray, center + 1, end);
+        } else {
+            return rotateSortedArray(rotatedArray, start, center );
+        }
+    }
+
+    public static int rotateSortedArray2(int[] rotatedArray) {
+        if (rotatedArray == null || rotatedArray.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
+        int index1 = 0;
+        int index2 = rotatedArray.length - 1;
+        int indexMid = index1;
+
+        while (rotatedArray[index1] >= rotatedArray[index2]) {
+            if (index2 - index1 == 1) {
+                indexMid = index2;
+                break;
+            }
+            indexMid = (index1 + index2) / 2;
+            if (rotatedArray[indexMid] >= rotatedArray[index1]) {
+                index1 = indexMid;
+            } else if (rotatedArray[indexMid] <= rotatedArray[index2]) {
+                index2 = indexMid;
+            }
+        }
+
+        return rotatedArray[indexMid];
+    }
+
+
+    @Test
+    public void test11() {
+        int result = Fibonacci(10);
+        System.out.println(result);
+    }
+
+
+    /**
+     * 11 f(n) = f(n-1) + f(n-2)
+     *
+     */
+    public static int Fibonacci(int n) {
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+
+        int a1 = 0;
+        int a2 = 1;
+
+
+        for (int i=1 ; i < n; i++) {
+            int tmp = a1 + a2;
+            a1 = a2;
+            a2 = tmp ;
+        }
+
+        return a2;
+    }
+
+    @Test
+    public void test12() {
+        int result = qiwaTaijie(5);
+        System.out.println(result);
+    }
+
+
+    /**
+     * 青蛙跳台阶
+     *
+     * 1  -  1
+     * 2  -  2
+     * 3  -  1 + 1 + 1 = 3
+     * 4 -  1 + 1 + 3 = 5
+     *
+     * f(1) = 1;
+     * f(2) = 2
+     * f(n) = f(n-1)+f(n-2)
+     */
+    public static int qiwaTaijie(int n) {
+
+        if (n <= 0) {
+            throw new IllegalArgumentException();
+        }
+
+        if (n == 1) {
+            return 1;
+        }
+
+        int a1 = 1;
+        int a2 = 2;
+        for(int i=2; i<n ; i++) {
+            int tmp = a1 + a2;
+            a1 = a2;
+            a2 = tmp;
+        }
+
+        return a2;
+
+
+
+    }
 
 }
