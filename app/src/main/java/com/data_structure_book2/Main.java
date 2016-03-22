@@ -509,6 +509,8 @@ public class Main {
      * f(1) = 1;
      * f(2) = 2
      * f(n) = f(n-1)+f(n-2)
+     * 分离：　第一次只跳１级，则后面是f(n-1)
+     *  第一次只跳二级，则后面是f(n-2)
      */
     public static int qiwaTaijie(int n) {
 
@@ -527,11 +529,237 @@ public class Main {
             a1 = a2;
             a2 = tmp;
         }
-
         return a2;
-
-
-
     }
+
+
+
+    @Test
+    public void test13() {
+        System.out.println(numberOfOne(10));
+        System.out.println(numberOfOne(9));
+        System.out.println(numberOfOne(8));
+        System.out.println(numberOfOne(-1));
+        System.out.println(numberOfOne(-2));
+
+        System.out.println(numberOfOne2(10));
+        System.out.println(numberOfOne2(9));
+        System.out.println(numberOfOne2(8));
+        System.out.println(numberOfOne2(-1));
+        System.out.println(numberOfOne2(-2));
+
+        System.out.println(numboerOfOne3(10));
+        System.out.println(numboerOfOne3(9));
+        System.out.println(numboerOfOne3(8));
+        System.out.println(numboerOfOne3(-1));
+        System.out.println(numboerOfOne3(-2));
+    }
+
+    /**
+     * 判断一个整数中1个个数
+     *
+     * 方法1 : 除法
+     * 方法2 ：&1左移 （无）
+     * 方法3 ：无负数的右移
+     * 方法4 ：减去1
+     *
+     */
+    public static int numberOfOne(int n) {
+        int m = n >= 0 ? n : -n - 1;
+        int oneNumber = 0;
+        while (m != 0) {
+            if (m % 2 == 1) {
+                oneNumber++;
+            }
+            m /= 2;
+        }
+        if (n < 0) {
+            oneNumber = 32 - oneNumber;
+        }
+        return oneNumber;
+    }
+
+    public static int numberOfOne2(int n) {
+        int oneNumber = 0;
+        while (n != 0) {
+            if ((n & 0x01) == 1) {
+                oneNumber++;
+            }
+
+            n  = n >>> 1;
+        }
+        return oneNumber;
+    }
+
+    public static int numboerOfOne3(int n) {
+        int count = 0;
+        while (n != 0) {
+            count ++;
+            n = (n - 1) & n;
+        }
+        return count;
+    }
+
+
+
+
+    @Test
+    public void test14() {
+        System.out.println(power(10, 1));
+        System.out.println(power(10, 2));
+        System.out.println(power(10, 3));
+        System.out.println(power(10, 4));
+    }
+
+    /**
+     * 求pow
+     * 核心在于异常输入、边界输入
+     */
+    public static double power(double base, int expoent) {
+        if (equal(base, 0.0) && expoent < 0) {
+            return 0.0;
+        }
+
+        int absExpoent = expoent < 0 ? -expoent : expoent;
+
+        double result = powWithPositiveNumber(base, absExpoent);
+        if (expoent < 0) {
+            result = 1.0 / result;
+        }
+        return result;
+    }
+
+    private static double powWithPositiveNumber(double base, int absExpoent) {
+        double result = 1.0;
+        for (int i=1; i <= absExpoent; i++) {
+            result *= base;
+        }
+        return result;
+    }
+
+    private static boolean equal(double num1, double num2) {
+        if ((num1 - num2 > - 0.0000001) &&
+                (num1 - num2 < 0.0000001)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    @Test
+    public void test15() {
+        int[] array = new int[] {1, 2, 3,4,5, 6,7,8,9,10,11,13,14,8};
+        swapJishuOushu(array);
+        System.out.println(Arrays.toString(array));
+    }
+
+    /**
+     * 偶数在前，奇数在后
+     */
+    public static void swapJishuOushu(int[] array) {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+
+        int leftPos = 0;
+        int rightPos = array.length - 1;
+
+        while (leftPos < rightPos) {
+            while ( array[leftPos] % 2 == 1 && leftPos < array.length) {
+                leftPos++;
+            }
+
+            while (array[rightPos] % 2 == 0 && rightPos >= 0) {
+                rightPos--;
+            }
+
+            if (leftPos < rightPos) {
+                swap(array, leftPos, rightPos);
+            }
+        }
+    }
+
+
+
+    @Test
+    public void test16() {
+        SingleNode<Integer> header = new SingleNode(1, null);
+        SingleNode<Integer>  header1 = new SingleNode(2, null);
+        SingleNode<Integer>  header2 = new SingleNode(3, null);
+        SingleNode<Integer>  header3 = new SingleNode(4, null);
+        SingleNode<Integer>  header4 = new SingleNode(5, null);
+        SingleNode<Integer>  header5= new SingleNode(6, null);
+        header.nextNode = header1;
+        header1.nextNode = header2;
+        header2.nextNode = header3;
+        header3.nextNode = header4;
+        header4.nextNode = header5;
+
+        int lastKthElement = findLastKthEle2(header, 3);
+        System.out.println(lastKthElement);
+    }
+
+    /**
+     * 输出链表的倒数第几个数字
+     */
+    public static <T> T findLastKthEle(SingleNode<T> header, int k) {
+        if (header == null) {
+            throw new IllegalArgumentException("header is null");
+        }
+
+        SingleNode<T> curNode = header;
+        int size = 0;
+        while(curNode != null) {
+            curNode = curNode.nextNode;
+            size++;
+        }
+
+        if (k > size) {
+            throw new IllegalArgumentException("k is larger than singnode's size");
+        }
+
+        curNode = header;
+        for(int i = 0 ; i < size - k ; i++) {
+            curNode = curNode.nextNode;
+        }
+
+        return curNode.data;
+    }
+
+    /**
+     * 第二种解法，两个指针同时遍历
+     */
+    public static <T> T findLastKthEle2(SingleNode<T> header, int k) {
+        if (header == null) {
+            throw new IllegalArgumentException("header is null");
+        }
+
+        if (k <= 0) {
+            throw new IllegalArgumentException("k small than zero");
+        }
+
+        SingleNode<T> preNode = header;
+        SingleNode<T> lastNode = header;
+        int size  = -1;
+        while(preNode != null) {
+            preNode = preNode.nextNode;
+            size++;
+            if (size >= k) {
+                lastNode = lastNode.nextNode;
+            }
+        }
+
+        if (size < k) {
+            throw new IllegalArgumentException("k is larger than singnode's size");
+        }
+
+        return lastNode.data;
+    }
+
+
+
+
+
 
 }
