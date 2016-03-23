@@ -1,15 +1,13 @@
 package com.data_structure_book2;
 
 
-import android.util.Log;
-
-import com.data_structure_book.heap.BinaryHeap;
-import com.example.demo.AppInfo;
-
-import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class Main {
@@ -196,14 +194,18 @@ public class Main {
     public void test6() {
         int[] preList = new int[]{1, 2, 4, 7, 3, 5, 6, 8};
         int[] middleList = new int[] {4, 7, 2, 1, 5, 3, 8, 6};
-        BinaryTree tree = buildTree(preList, middleList);
+        BinaryTree<Integer> tree = buildTree(preList, middleList);
         System.out.println("");
     }
 
-    public static class BinaryTree {
-        int data;
-        BinaryTree left;
-        BinaryTree right;
+    public static class BinaryTree<T> {
+        T data;
+        BinaryTree<T> left;
+        BinaryTree<T> right;
+
+        public BinaryTree(T data){
+            this.data = data;
+        }
     }
 
     /**
@@ -217,25 +219,25 @@ public class Main {
      * 4 7 2 1 5 3 8 6
      *
      */
-    public static BinaryTree buildTree(int[] preList, int[] middleList) {
+    public static BinaryTree<Integer> buildTree(int[] preList, int[] middleList) {
         if (preList == null) {
             throw new IllegalArgumentException();
         }
 
-        BinaryTree root = new BinaryTree();
+        BinaryTree<Integer> root = new BinaryTree<Integer>(0);
         buildTree(root, preList, 0, middleList, 0, middleList.length - 1);
         return root;
     }
 
-    public static BinaryTree buildTree(BinaryTree root, int[] preList, int preStart,
-                                       int[] middleList, int middleStart, int middleEnd) {
+    public static BinaryTree<Integer> buildTree(BinaryTree<Integer> root, int[] preList, int preStart,
+                                          int[] middleList, int middleStart, int middleEnd) {
         int size = middleEnd - middleStart;
         if (preList == null || size < 0 || preStart >= preList.length) {
             return null;
         }
 
         if (root == null) {
-            root = new BinaryTree();
+            root = new BinaryTree<Integer>(0);
         }
         root.data = preList[preStart];
 
@@ -757,9 +759,431 @@ public class Main {
         return lastNode.data;
     }
 
+    @Test
+    public void test17() {
+        SingleNode s1 = new SingleNode(10, null);
+        SingleNode s2 = new SingleNode(100, null);
+        SingleNode s3 = new SingleNode(80, null);
+        SingleNode s4 = new SingleNode(90, null);
+        SingleNode s5 = new SingleNode(30, null);
+        SingleNode s6 = new SingleNode(1, null);
+
+        s1.nextNode = s2;
+        s2.nextNode = s3;
+        s3.nextNode = s4;
+        s4.nextNode = s5;
+        s5.nextNode = s6;
+
+        s1 = reverseNode2(s1);
+        System.out.println(s1.data);
+    }
+
+    private static SingleNode reverseNode(SingleNode header) {
+        if (header == null) {
+            throw new IllegalArgumentException();
+        }
+
+        SingleNode reverseNode = null;
+        while (header != null) {
+            SingleNode nextNode = header.nextNode;
+            header.nextNode = reverseNode;
+            reverseNode = header;
+            header = nextNode;
+        }
+        return reverseNode;
+    }
+
+    private static SingleNode reverseNode2(SingleNode header) {
+        if (header == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return reverseNode2(null, header);
+    }
+
+    private static SingleNode reverseNode2(SingleNode preNode, SingleNode currentNode) {
+        if (currentNode == null) {
+            return preNode;
+        }
+
+        SingleNode nextNode = currentNode.nextNode;
+        currentNode.nextNode = preNode;
+        return reverseNode2(currentNode, nextNode);
+    }
+
+
+    @Test
+    public void test18() {
+        SingleNode s1 = new SingleNode(10, null);
+        SingleNode s2 = new SingleNode(100, null);
+        SingleNode s3 = new SingleNode(200, null);
+
+        SingleNode s4 = new SingleNode(80, null);
+        SingleNode s5 = new SingleNode(150, null);
+        SingleNode s6 = new SingleNode(180, null);
+
+        s1.nextNode = s2;
+        s2.nextNode = s3;
+
+        s4.nextNode = s5;
+        s5.nextNode = s6;
+
+        SingleNode orderList = sortTwoList(s1, s4);
+        System.out.println("orderList->" + orderList);
+    }
+
+
+    private static <T extends Comparable<? super T>> SingleNode<T> sortTwoList(SingleNode<T> s1, SingleNode<T> s2) {
+        if (s1 == null || s2 == null) {
+            return s1 == null ?  s2 : s1;
+        }
+
+        SingleNode<T> resultList = new SingleNode<T>(null, null);
+        SingleNode<T> markList = resultList;
+        while (s1 != null && s2 != null) {
+            int compareResult = s1.data.compareTo(s2.data);
+            if (compareResult <= 0) {
+                markList.nextNode = s1;
+                s1 = s1.nextNode;
+            } else {
+                markList.nextNode = s2;
+                s2 = s2.nextNode;
+            }
+            markList = markList.nextNode;
+        }
+
+        markList.nextNode = (s1 == null) ? s2 : s1;
+        return resultList.nextNode;
+    }
+
+
+    @Test
+    public void test19() {
+        BinaryTree<Integer> tree1 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree2 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree3 = new BinaryTree<Integer>(7);
+        BinaryTree<Integer> tree4 = new BinaryTree<Integer>(9);
+        BinaryTree<Integer> tree5 = new BinaryTree<Integer>(2);
+        BinaryTree<Integer> tree6 = new BinaryTree<Integer>(4);
+        BinaryTree<Integer> tree7 = new BinaryTree<Integer>(7);
+
+        tree1.left = tree2;
+        tree1.right = tree3;
+        tree2.left = tree4;
+        tree2.right = tree5;
+        tree5.left = tree6;
+        tree5.right = tree7;
+
+        BinaryTree<Integer> tree10 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree11 = new BinaryTree<Integer>(9);
+        BinaryTree<Integer> tree12 = new BinaryTree<Integer>(2);
+        tree10.left = tree11;
+        tree10.right = tree12;
+
+        boolean isSubTree = isSubTree(tree1, tree10);
+        System.out.println(isSubTree);
+    }
+
+
+    public static boolean isSubTree(BinaryTree<Integer> tree1, BinaryTree<Integer> tree2) {
+        if (tree1 == null || tree2 == null) {
+            return false;
+        }
+       return isSubTreeFromRoot(tree1, tree2) ||
+               isSubTree(tree1.left, tree2) || isSubTree(tree1.right, tree2);
+    }
+
+    private static boolean isSubTreeFromRoot(BinaryTree<Integer> tree1, BinaryTree<Integer> tree2) {
+        if (tree2 == null) {
+            return true;
+        } else if ( tree1 == null ) {
+            return false;
+        }
+        return tree1.data == tree2.data &&
+                isSubTreeFromRoot(tree1.left, tree2.left) &&
+                isSubTreeFromRoot(tree1.right , tree2.right);
+    }
+
+
+    @Test
+    public void test20() {
+        BinaryTree<Integer> tree1 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree2 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree3 = new BinaryTree<Integer>(7);
+        BinaryTree<Integer> tree4 = new BinaryTree<Integer>(9);
+        BinaryTree<Integer> tree5 = new BinaryTree<Integer>(2);
+        BinaryTree<Integer> tree6 = new BinaryTree<Integer>(4);
+        BinaryTree<Integer> tree7 = new BinaryTree<Integer>(7);
+
+        tree1.left = tree2;
+        tree1.right = tree3;
+        tree2.left = tree4;
+        tree2.right = tree5;
+        tree5.left = tree6;
+        tree5.right = tree7;
+
+       getMirrorTree(tree1);
+        System.out.println(tree1);
+    }
+
+    public static void getMirrorTree(BinaryTree<Integer> root) {
+        if(root == null) {
+        }
+
+        BinaryTree<Integer> tmpLeft = root.left;
+        root.left = root.right;
+        root.right = tmpLeft;
+        if (root.left != null) {
+          getMirrorTree(root.left);
+        }
+        if (root.right != null) {
+             getMirrorTree(root.right);
+        }
+    }
 
 
 
+    @Test
+    public void test21() {
+        int[][] array = new int[8][5];
+        for(int i = 0; i < array.length; i++) {
+            for( int j = 0; j < 5; j++) {
+                array[i][j] = 5 * i + j + 1;
+            }
+        }
+
+        for(int i = 0; i< array.length; i++) {
+            System.out.println(Arrays.toString(array[i]));
+        }
+        printOut2Inner(array);
+    }
+
+    private static void printOut2Inner(int[][] array) {
+        if (array == null ) {
+            throw new IllegalArgumentException();
+        }
+
+        if (array.length == 0 || array[0].length == 0) {
+            System.out.println("array is zero row or col");
+        }
+
+        printOut2Inner(array, 0, array.length - 1, 0, array[0].length - 1);
+    }
+
+    private static void printOut2Inner(int[][] array, int rowStart, int rowEnd, int colStart, int colEnd) {
+        if (rowStart > rowEnd || colStart > colEnd) {
+            return;
+        }
+
+        if (rowStart == rowEnd) {
+            for(int i = colStart; i <= colEnd; i++) {
+                System.out.print(array[rowStart][i]);
+                System.out.print(",");
+            }
+            return;
+        }
+
+        if (colStart == colEnd) {
+            for(int i = rowStart; i <= rowEnd; i++) {
+                System.out.print(array[i][colStart]);
+                System.out.print(",");
+            }
+            return;
+        }
+
+        for(int i = colStart; i <= colEnd; i++) {
+            System.out.print(array[colStart][i]);
+            System.out.print(",");
+        }
+
+        for(int i = rowStart + 1; i <= rowEnd; i++) {
+            System.out.print(array[i][colEnd]);
+            System.out.print(",");
+        }
+
+        for(int i = colEnd - 1; i >= colStart; i--) {
+            System.out.print(array[rowEnd][i]);
+            System.out.print(",");
+        }
+
+        for(int i = rowEnd - 1; i > rowStart; i--) {
+            System.out.print(array[i][colStart]);
+            System.out.print(",");
+        }
+
+        printOut2Inner(array, rowStart + 1, (rowEnd - 1) , colStart + 1 , (colEnd - 1));
+    }
 
 
+    @Test
+    public void test22() {
+        int[] stack = new int[] {1 ,2 , 3, 4 ,5 };
+        int[] popStack1 = new int[] {5 , 4, 3, 2, 1 };
+        int[] popStack2 = new int[] { 4, 3, 4, 1, 2};
+
+        boolean a = isPopStack(stack, popStack1);
+        boolean b = isPopStack(stack, popStack2);
+        System.out.println(" a->" + a + "  b->" + b);
+    }
+
+    private static boolean isPopStack(int[] stack, int[] popStack) {
+        if (stack == null || popStack == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (stack.length != popStack.length) {
+            return false;
+        }
+
+        Stack<Integer> helpStack = new Stack();
+        int popPos = 0;
+
+        for(int i=0; i<stack.length; i++) {
+            helpStack.push(stack[i]);
+            while (!helpStack.isEmpty() && helpStack.peek() == popStack[popPos]) {
+                helpStack.pop();
+                popPos++;
+            }
+        }
+        return helpStack.isEmpty();
+    }
+
+
+    @Test
+    public void test23() {
+        BinaryTree<Integer> tree1 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree2 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree3 = new BinaryTree<Integer>(7);
+        BinaryTree<Integer> tree4 = new BinaryTree<Integer>(9);
+        BinaryTree<Integer> tree5 = new BinaryTree<Integer>(2);
+        BinaryTree<Integer> tree6 = new BinaryTree<Integer>(4);
+        BinaryTree<Integer> tree7 = new BinaryTree<Integer>(7);
+
+        tree1.left = tree2;
+        tree1.right = tree3;
+        tree2.left = tree4;
+        tree2.right = tree5;
+        tree5.left = tree6;
+        tree5.right = tree7;
+
+        printTreeByLevel(tree1);
+    }
+
+    private static void printTreeByLevel(BinaryTree<Integer> tree) {
+        if (tree == null) {
+            throw new IllegalArgumentException();
+        }
+        Queue<BinaryTree<Integer>> queue = new ArrayDeque<BinaryTree<Integer>>();
+        queue.add(tree);
+        while (!queue.isEmpty()) {
+            BinaryTree<Integer> cNode = queue.poll();
+            if (cNode.left != null) {
+                queue.add(cNode.left);
+            }
+            if(cNode.right != null) {
+                queue.add(cNode.right);
+            }
+            System.out.print(cNode.data + "  ,");
+        }
+
+    }
+
+
+    @Test
+    public void test24() {
+        BinaryTree<Integer> tree1 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree2 = new BinaryTree<Integer>(8);
+        BinaryTree<Integer> tree3 = new BinaryTree<Integer>(7);
+        BinaryTree<Integer> tree4 = new BinaryTree<Integer>(9);
+        BinaryTree<Integer> tree5 = new BinaryTree<Integer>(2);
+        BinaryTree<Integer> tree6 = new BinaryTree<Integer>(4);
+        BinaryTree<Integer> tree7 = new BinaryTree<Integer>(7);
+
+        tree1.left = tree2;
+        tree1.right = tree3;
+        tree2.left = tree4;
+        tree2.right = tree5;
+        tree5.left = tree6;
+        tree5.right = tree7;
+
+        printPath(tree1, 25);
+
+    }
+
+    public static void printPath(BinaryTree root, int totalNum) {
+        if (root == null) {
+            return;
+        }
+        LinkedList path = new LinkedList();
+        printPath( root, path, 0, totalNum);
+    }
+
+    public static void printPath(BinaryTree<Integer> root, LinkedList<Integer> path, int currentNum, int totalNum) {
+        if (root == null) {
+            return;
+        }
+
+        currentNum += root.data;
+        path.push(root.data);
+
+        if (root.left == null && root.right == null && currentNum == totalNum) {
+            for(int i= path.size() - 1; i >= 0; i--) {
+                System.out.print( path.get(i) + "   ");
+            }
+            System.out.println();
+        }
+
+        if (root.left != null) {
+            printPath(root.left, path, currentNum, totalNum);
+        }
+        if (root.right != null) {
+            printPath(root.right, path, currentNum, totalNum);
+        }
+
+        path.pop();
+    }
+
+
+    @Test
+    public void test25() {
+        printArrangeString("abc".toCharArray());
+//        printArrangeString("defg".toCharArray());
+
+    }
+
+    private static void printArrangeString(char[] originChars) {
+        if (originChars == null) {
+            throw new IllegalArgumentException();
+        }
+        printArrangeString(originChars, 0);
+    }
+
+    private static void swap(char[] chars, int i, int j) {
+        if ( i == j) {
+            return;
+        }
+        char tmp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = tmp;
+    }
+
+    private static void printArrangeString(char[] originChars, int start) {
+        if (start >= originChars.length - 1) {
+            System.out.println(new String(originChars));  //如果排序完成，则输出
+            return;
+        }
+
+        for(int i =  start; i< originChars.length; i++) {
+            //循环遍历中，把a和各个字符交换位置，将他们放置到首位
+            swap(originChars, start, i);
+
+            //递归，把后面的字符也重新排序
+            printArrangeString(originChars, start + 1);
+
+            //再将结果该回去
+            swap(originChars, start, i);
+        }
+
+
+    }
 }
